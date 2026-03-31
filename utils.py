@@ -28,5 +28,6 @@ async def notify(uuid: str, username: str) -> None:
             key = f'{year}-{month}-{day}'
             if last_gexp[uuid] != -1 and last_gexp[uuid] != expHistory[key]:
                 await AIDAN.send(f':rotating_light: User {username} has had changes in their guild experience :rotating_light:')
+            last_gexp[uuid] = expHistory[key]
     except Exception as e:
         print(f'Something went wrong: {e}')
