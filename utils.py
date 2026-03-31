@@ -12,7 +12,7 @@ async def get_uuid(username: str) -> str | None:
 import datetime
 from zoneinfo import ZoneInfo
 async def notify(uuid: str, username: str) -> None:
-    from main import last_gexp, AIDAN
+    import main
     try:
         async with aiohttp.request("GET", f"https://api.hypixel.net/guild?key={os.getenv('HYPIXEL_API_KEY')}&player={uuid}") as response:
             data = await response.json()
@@ -26,8 +26,8 @@ async def notify(uuid: str, username: str) -> None:
             month = str(current_date.month).rjust(2, '0')
             day = str(current_date.day).rjust(2, '0')
             key = f'{year}-{month}-{day}'
-            if last_gexp[uuid] != -1 and last_gexp[uuid] != expHistory[key]:
-                await AIDAN.send(f':rotating_light: User {username} has had changes in their guild experience :rotating_light:')
-            last_gexp[uuid] = expHistory[key]
+            if main.last_gexp[uuid] != -1 and main.last_gexp[uuid] != expHistory[key]:
+                await main.AIDAN.send(f':rotating_light: User {username} has had changes in their guild experience :rotating_light:')
+            main.last_gexp[uuid] = expHistory[key]
     except Exception as e:
         print(f'Something went wrong: {e}')
