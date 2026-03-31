@@ -9,7 +9,7 @@ from utils import get_uuid
 dotenv.load_dotenv()
 
 bot = discord.Client(intents=discord.Intents.all())
-bot.tree = app_commands.CommandTree(bot, allowed_contexts=app_commands.AppCommandContext(guild=True, dm_channel=True, private_channel=True), allowed_installs=app_commands.AppInstallationType(guild=True, dm_channel=True, private_channel=True))
+bot.tree = app_commands.CommandTree(bot, allowed_contexts=app_commands.AppCommandContext(guild=True, dm_channel=True, private_channel=True), allowed_installs=app_commands.AppInstallationType(guild=True, user=True))
 scheduler = AsyncIOScheduler()
 jobs = {}
 last_gexp = defaultdict(lambda: -1)
