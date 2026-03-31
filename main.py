@@ -36,7 +36,7 @@ async def track(interaction: discord.Interaction, user: str):
         await interaction.followup.send(f'User {user} already being tracked.')
         return
 
-    jobs[user] = scheduler.add_job(notify, args=[uuid, user], trigger=CronTrigger(minute='*'))
+    jobs[user] = scheduler.add_job(notify, args=[uuid, user, AIDAN], trigger=CronTrigger(minute='*'))
     await interaction.followup.send(f'Now tracking {user}')
 
 @bot.tree.command(name='untrack', description='Untracks changes in Hypixel user\'s Guild experience.')
