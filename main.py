@@ -1,4 +1,4 @@
-import discord, dotenv
+import discord, dotenv, sys
 from discord import app_commands
 from apscheduler.triggers.cron import CronTrigger
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
@@ -15,10 +15,13 @@ jobs = {}
 last_gexp = defaultdict(lambda: -1)
 AIDAN = 1364970345781526601
 
+args = sys.argv[1:]
 @bot.event
 async def on_ready():
     global AIDAN
     AIDAN = await bot.fetch_user(AIDAN)
+    if '--sync' in args:
+        await bot.tree.sync()
     print('BOT READY')
 
 
