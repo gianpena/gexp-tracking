@@ -22,6 +22,8 @@ async def on_ready():
     AIDAN = await bot.fetch_user(AIDAN)
     if '--sync' in args:
         await bot.tree.sync()
+
+    scheduler.start()
     print('BOT READY')
 
 
@@ -46,3 +48,6 @@ async def untrack(interaction: discord.Interaction, user: str):
     jobs[user].remove()
     del jobs[user]
     last_gexp[user] = -1
+
+import os
+bot.run(os.getenv('BOT_TOKEN'))
