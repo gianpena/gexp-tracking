@@ -50,4 +50,5 @@ async def untrack(interaction: discord.Interaction, user: str):
     last_gexp[user] = -1
 
 import os
-bot.run(os.getenv('BOT_TOKEN'))
+if __name__ == '__main__':
+    bot.run(os.getenv('BOT_TOKEN'))
