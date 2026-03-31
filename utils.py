@@ -5,7 +5,8 @@ async def get_uuid(username: str) -> str | None:
         async with aiohttp.request("GET", f"https://api.mojang.com/users/profiles/minecraft/{username}") as response:
             data = await response.json()
             return data.get('id')
-    except Exception:
+    except Exception as e:
+        print(f'Error fetching uuid: {e}')
         return None
 
 import datetime
@@ -27,5 +28,5 @@ async def notify(uuid: str, username: str) -> None:
             key = f'{year}-{month}-{day}'
             if last_gexp[uuid] != -1 and last_gexp[uuid] != expHistory[key]:
                 await AIDAN.send(f':rotating_light: User {username} has had changes in their guild experience :rotating_light:')
-    except Exception:
-        pass
+    except Exception as e:
+        print(f'Something went wrong: {e}')
