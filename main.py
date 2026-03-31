@@ -29,8 +29,8 @@ async def on_ready():
 
 @bot.tree.command(name='track', description='Tracks changes in Hypixel user\'s Guild experience.')
 async def track(interaction: discord.Interaction, user: str):
-    from utils import notify
     await interaction.response.defer()
+    from utils import notify
     uuid = await get_uuid(user)
     if uuid in jobs:
         await interaction.followup.send(f'User {user} already being tracked.')
